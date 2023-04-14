@@ -17,6 +17,15 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/users',['uses' => 'UserController@getUsers']);
+// unsecure routes
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('/users',['uses' => 'UserController@getUsers']);
+});
 
-$router->post('/users', ['uses' => 'UserController@add']); 
+// more simple routes
+$router->get('/users', 'UserController@index'); // get all users records
+$router->post('/users', ['uses' => 'UserController@addUser']); // create new user record
+$router->get('/users/{id}', 'UserController@showUserID'); // get user by id
+$router->put('/users/{id}', 'UserController@updateUser'); // update user record
+$router->patch('/users/{id}', 'UserController@updateUser'); // update user record
+$router->delete('/users/{id}', 'UserController@deleteUser'); // delete record
