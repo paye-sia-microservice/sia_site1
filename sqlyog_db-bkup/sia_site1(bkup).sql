@@ -21,18 +21,22 @@ USE `sia_site1`;
 DROP TABLE IF EXISTS `tbluser`;
 
 CREATE TABLE `tbluser` (
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `user_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `gender` enum('Male','Female') DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tbluser` */
 
-insert  into `tbluser`(`username`,`password`) values 
-('user1','pass1'),
-('user2','pass2'),
-('user3','pass3'),
-('user4','pass4'),
-('user5','pass5'),
-('user6','pass6'),
-('user7','pass7'),
-('user8','pass8');
+insert  into `tbluser`(`user_id`,`username`,`password`,`gender`) values 
+(1,'user1','pass1','Male'),
+(2,'user2','pass2','Female'),
+(3,'user3','pass3','Male'),
+(4,'user4','pass4','Female');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
