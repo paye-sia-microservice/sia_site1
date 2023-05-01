@@ -14,4 +14,4 @@
 
         public $timestamps = false;
         protected $primaryKey = 'user_id';
-    }
+    } 
