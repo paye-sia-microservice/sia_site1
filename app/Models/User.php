@@ -12,6 +12,9 @@
             'username', 'password', 'gender'
         ];
 
-        public $timestamps = false;
+    public $timestamps = false;
         protected $primaryKey = 'user_id';
+        protected $hidden = [
+            'password'
+        ];
     }
