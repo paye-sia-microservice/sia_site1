@@ -23,5 +23,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 });
 
 // more simple routes
+$router->get('/users', 'UserController@index'); // get all users records
 $router->post('/users', ['uses' => 'UserController@addUser']); // create new user record
 $router->get('/users/{id}', 'UserController@showUserID'); // get user by id
+$router->put('/users/{id}', 'UserController@updateUser'); // update user record
+$router->patch('/users/{id}', 'UserController@updateUser'); // update user record
+$router->delete('/users/{id}', 'UserController@deleteUser'); // delete record
