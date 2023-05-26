@@ -27,17 +27,13 @@ class UserController extends Controller
     }
     
     public function showUsers(){
+        $users = User::all();
         return $this -> successResponse(User::all());
     }
 
     public function showUser($id){
-        try{
-            $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
         return $this->successResponse($user);
-        } 
-        catch (\Exception $exception ){
-        return $this->errorNotFound($id, 'Not Found', 404);
-        }
     }
 
     public function addUser(Request $request){
@@ -50,18 +46,22 @@ class UserController extends Controller
 
         $validate = $this->validate($request, $rules);
 
+        $user = User::create($request->all());
         $userjob = UserJob::findOrFail($request->jobid);
-        
-        if ($validate){
-            $user = User::create($request->all());
 
-            return $this->successResponse($user, 201);
-        }
-        else{
-            return $this->ErrorResponse("Operation Cannot be done.", 
-            Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-    }
+        return $this->successResponse($user, Response::HTTP_CREATED);
+    }   
+        
+    //  if ($validate){
+    //         $user = User::create($request->all());
+
+    //         return $this->successResponse($user, 201);
+    //     }
+    //     else{
+    //         return $this->ErrorResponse("Operation Cannot be done.", 
+    //         Response::HTTP_UNPROCESSABLE_ENTITY);
+    //     }
+    // }
 
     public function updateUser(Request $request, $id){
         $rules = [
@@ -72,6 +72,7 @@ class UserController extends Controller
         ];
 
         $validate = $this->validate($request, $rules);
+
         $userjob = UserJob::findOrFail($request->jobid);
 
         if ($validate){
@@ -86,15 +87,13 @@ class UserController extends Controller
                 $user->save();
                 return $this->successResponse($user);
             }
-        } 
-        else{
-            return $this->serverError("Operation Cannot be done.", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function deleteUser($id){ 
         $user = User::findOrFail($id);
         $user->delete();
+        
         return $this->successResponse($user);
     }
 }

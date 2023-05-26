@@ -21,8 +21,8 @@ $router->group(['prefix' => 'api'], function($router) {
     $router->get('/users', 'UserController@showUsers');
     $router->get('/users/{id}', 'UserController@showUser');
     $router->post('/users', 'UserController@addUser');
-    $router->delete('/users/{id}', 'UserController@deleteUser');
     $router->patch('/users/{id}', 'UserController@updateUser');
+    $router->delete('/users/{id}', 'UserController@deleteUser');
 });
 
 $router->group(['prefix' => 'api'], function($router) {
