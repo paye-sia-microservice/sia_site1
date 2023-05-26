@@ -17,15 +17,15 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-// unsecure routes
-$router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('/users',['uses' => 'UserController@getUsers']);
+$router->group(['prefix' => 'api'], function($router) {
+    $router->get('/users', 'UserController@showUsers');
+    $router->get('/users/{id}', 'UserController@showUser');
+    $router->post('/users', 'UserController@addUser');
+    $router->delete('/users/{id}', 'UserController@deleteUser');
+    $router->patch('/users/{id}', 'UserController@updateUser');
 });
 
-// more simple routes
-$router->get('/users', 'UserController@index'); // get all users records
-$router->post('/users', ['uses' => 'UserController@addUser']); // create new user record
-$router->get('/users/{id}', 'UserController@showUserID'); // get user by id
-$router->put('/users/{id}', 'UserController@updateUser'); // update user record
-$router->patch('/users/{id}', 'UserController@updateUser'); // update user record
-$router->delete('/users/{id}', 'UserController@deleteUser'); // delete record
+$router->group(['prefix' => 'api'], function($router) {
+    $router->get('/usersjob', 'UserJobController@showUsers');
+    $router->get('/usersjob/{id}', 'UserJobController@showUser');
+});
