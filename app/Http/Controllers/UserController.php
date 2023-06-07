@@ -17,11 +17,7 @@ class UserController extends Controller
     private $request;
 
     public $timestamps = false;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct(Request $request){
         $this->request = $request;
     }
@@ -52,17 +48,6 @@ class UserController extends Controller
         return $this->successResponse($user, Response::HTTP_CREATED);
     }   
         
-    //  if ($validate){
-    //         $user = User::create($request->all());
-
-    //         return $this->successResponse($user, 201);
-    //     }
-    //     else{
-    //         return $this->ErrorResponse("Operation Cannot be done.", 
-    //         Response::HTTP_UNPROCESSABLE_ENTITY);
-    //     }
-    // }
-
     public function updateUser(Request $request, $id){
         $rules = [
             'username' => 'required|max:20',
@@ -94,6 +79,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         
-        return $this->successResponse($user);
+        return $this -> successResponse('Deleted Successfully!');
     }
 }
